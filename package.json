@@ -10,10 +10,8 @@
     "start": "npm run dev -- --port 5000"
   },
   "dependencies": {
-    "@egjs/vue3-view360": "^4.0.0-beta.7",
     "@photo-sphere-viewer/core": "^5.11.1",
     "@photo-sphere-viewer/markers-plugin": "^5.11.1",
-    "@sirv/sirvjs-vue": "^1.0.9",
     "ant-design-vue": "^4.2.6",
     "antd": "^5.22.2",
     "axios": "^1.7.7",
@@ -25,7 +23,6 @@
     "vue": "^3.5.12",
     "vue-i18n": "^10.0.4",
     "vue-router": "^4.4.5",
-    "vue-vr": "^0.0.77",
     "vuex": "^4.1.0",
     "vuex-router-sync": "^5.0.0",
     "webpack": "^5.96.1",
