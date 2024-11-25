@@ -1,0 +1,54 @@
+:root {
+    --brand-color: #eb5931;
+    --text-color: #161616;
+    --hover-color: #e3e3e3;
+    --text-style: "Poppins"
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a2a2a2 !important;
+}
+
+.table-striped {
+    margin: 5px;
+    padding: 10px;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.table-yellow-btn {
+    color: #fbb500;
+}
+
+.table-green-btn {
+    color: #2bc155;
+}
+
+.table-red-btn {
+    color: #d04969;
+}
+
+.ant-table-wrapper .ant-table-thead > tr > th::before {
+    display: none;
+}
+
+.ant-table-wrapper {
+    max-width: 90%;
+    margin: 10px 30px 0 30px;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+    }
+}
+
+*,
+*::before,
+*::after {
+}
+
+body {
+}

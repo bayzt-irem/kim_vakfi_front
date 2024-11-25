@@ -1,0 +1,67 @@
+@import "./base.css";
+
+#app {
+  :root {
+    --brand-color: #eb5931;
+    --text-color: #161616;
+    --hover-color: #e3e3e3;
+    --text-style: "Poppins"
+
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #b8b8b8;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+    transition: all 0.3s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+  }
+
+  .ant-table-wrapper .ant-table-thead > tr > th::before {
+    display: none;
+  }
+
+  .ant-table-wrapper {
+    max-width: 90%;
+    margin: 10px 30px 0 30px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+  }
+
+  body {
+  }
+}
+
+@media (hover: hover) {
+  a:hover {
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+  }
+
+  #app {
+  }
+}
