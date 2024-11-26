@@ -20,6 +20,21 @@ const routes = [
         name: "Home",
         component: () => import("../pages/Home.vue"),
       },
+      {
+        path: "/users",
+        name: "Users",
+        component: () => import("../pages/Users.vue"),
+      },
+      {
+        path: "/all-places",
+        name: "AllPlaces",
+        component: () => import("../pages/AllPlaces.vue"),
+      },
+      {
+        path: "/place/:id",
+        name: "Place",
+        component: () => import("../pages/Place.vue"),
+      },
     ],
   },
 ];

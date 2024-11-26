@@ -10,6 +10,7 @@
     <h2>Custom element 2</h2>
     <p>22Use an existing element as marker. This WebComponent contains it's own animations and tooltip.</p>
   </custom-marker>
+  <CartModal :close="() => cartVisible = false" v-if="cartVisible" :cartInfo="cartInfo"/>
 </template>
 
 <script>
@@ -17,14 +18,20 @@ import {Viewer} from '@photo-sphere-viewer/core';
 import {MarkersPlugin} from '@photo-sphere-viewer/markers-plugin';
 import "@photo-sphere-viewer/core/index.css";
 import "@photo-sphere-viewer/markers-plugin/index.css";
+import CartModal from "./CartModal.vue";
 
 const baseUrl = 'https://photo-sphere-viewer-data.netlify.app/assets/';
 
 export default {
-  name: 'PhotoSphereViewer',
+  name: 'Home',
+  components:{
+    CartModal
+  },
   data() {
     return {
       viewer: null,
+      cartVisible: false,
+      cartInfo: {}
     };
   },
   mounted() {
@@ -165,8 +172,11 @@ button:hover + .tooltip {
           button.addEventListener('mouseleave', () => {
             this.tooltip.classList.add('hiding');
           });
+
           button.addEventListener('click', (event) => {
-            console.log("click", event)
+            console.log("click: ", event)
+            this.visibleModal = true;
+            this.selectedCart = event.target;
           });
 
           dom.addEventListener('animationend', () => {
@@ -210,6 +220,15 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
             }],
           }],
         ],
+      });
+
+      this.viewer.addEventListener('click', (event) => {
+        console.log("addEventListener: ", event)
+        this.cartInfo = {
+          pitch: event.data.pitch,
+          yaw: event.data.yaw
+        }
+        this.cartVisible = true;
       });
     },
   },

@@ -33,7 +33,7 @@ export default {
         const data = result.data;
         if (result.status === 200) {
           setPersistenceData("token", data.token, true);
-          await commit("setUser", data.user);
+          await commit("setUser", data);
           return true;
         } else return false;
       });
@@ -43,7 +43,7 @@ export default {
         const data = result.data;
         if (result.status === 200) {
           setPersistenceData("token", data.token, true);
-          await commit("setUser", data.user);
+          await commit("setUser", data);
           return true;
         } else return false;
       });

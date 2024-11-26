@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 #button {
-  border: 1px solid grey;
+  background-color: #096782;
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
@@ -38,7 +38,7 @@ export default {
   width: fit-content;
 
   &:hover {
-    background-color: #a2a2a2;
+    background-color: #000000;
   }
 }
 </style>
