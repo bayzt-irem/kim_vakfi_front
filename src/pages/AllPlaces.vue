@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    getPlaceDetail(cartId){
+    getPlaceDetail(cartId) {
       this.$router.replace(`/place/${cartId}`)
     },
     async createPlace(payload) {
@@ -63,6 +63,7 @@ export default {
     display: flex;
     flex-direction: row;
 
+
     .cart {
       margin-right: 10px;
       width: fit-content;
@@ -78,6 +79,11 @@ export default {
 
       .info {
         margin-top: 5px;
+        padding: 3px;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

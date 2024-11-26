@@ -1,17 +1,29 @@
 <template>
-  <div id="viewer" class="viewer-container"></div>
-  <div v-for="cart of placeDetail.carts">
-    <custom-marker :id="cart.id">
-      <div>{{ cart.title }}</div>
-      <div>{{ cart.description }}</div>
-    </custom-marker>
+  <div id="place">
+    <div class="title"> {{ placeDetail.name }}</div>
+    <div class="description"> {{ placeDetail.description }}</div>
+    <div id="viewer" class="viewer-container"></div>
+    <div v-for="cart of placeDetail.carts">
+      <custom-marker :id="getId(cart.id)">
+        <div class="marker-info">{{ cart.title }}</div>
+        <div class="marker-info">{{ cart.description }}</div>
+      </custom-marker>
+    </div>
+    <div class="carts">
+      <div v-for="cart of placeDetail.carts" class="cart">
+        <div>{{ "Title: " + cart.title }}</div>
+        <div>{{ "Description: " + cart.description }}</div>
+        <div>{{ "Yaw: " + cart.yaw }}</div>
+        <div>{{ "Pitch: " + cart.pitch }}</div>
+      </div>
+    </div>
+    <CartModal
+        v-if="createCartVisible || updateCartVisible"
+        :cartInfo="cartInfo"
+        :close="() => closeVisible()"
+        :save-or-update="($event) => saveOrUpdate($event)"
+    />
   </div>
-  <CartModal
-      v-if="createCartVisible || updateCartVisible"
-      :cartInfo="cartInfo"
-      :close="() => closeVisible()"
-      :save-or-update="($event) => saveOrUpdate($event)"
-  />
 </template>
 
 <script>
@@ -25,7 +37,7 @@ import {CART_API} from "@/api/cart.js";
 
 export default {
   name: 'Place',
-  components:{
+  components: {
     CartModal
   },
   data() {
@@ -200,10 +212,11 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
       }
     },
     initializeViewer() {
+      console.log("initializeViewer: ", this.placeDetail)
       const markers = this.placeDetail.carts.map(x => {
         return {
           id: x.id,
-          element: document.querySelector(`#${x.id}`),
+          element: document.querySelector(`#kim${x.id.split('-')[0]}`),
           listContent: x.title,
           position: {yaw: x.yaw, pitch: x.pitch},
           zIndex: 10,
@@ -230,21 +243,17 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
     },
     async saveOrUpdate(payload) {
       if (this.createCartVisible) {
+        this.createCartVisible = false;
         payload.placeId = this.$route.params.id
         const result = await CART_API.create(payload)
         if (result.status === 200) {
-          payload.id = result.data
-          this.placeDetail.carts = [...this.placeDetail.carts, payload]
+          location.reload()
         }
       } else {
+        this.updateCartVisible = false
         const result = await CART_API.change(this.cartInfo.id, payload)
         if (result.status === 200) {
-          this.placeDetail.carts = this.placeDetail.carts.map(x => {
-            if (x.id === this.cartInfo.id) {
-              x = this.cartInfo
-            }
-            return x;
-          })
+          location.reload()
         }
       }
     },
@@ -252,6 +261,9 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
       this.createCartVisible = false;
       this.updateCartVisible = false;
     },
+    getId(cartId) {
+      return "kim" + cartId.split('-')[0]
+    }
   },
   async mounted() {
     await PLACE_API.get(this.$route.params.id).then(res => {
@@ -272,9 +284,44 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
 </script>
 
 <style scoped>
-.viewer-container {
-  width: 60%;
-  height: 300px;
-  position: relative;
+#place {
+  padding: 20px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .viewer-container {
+    width: 60%;
+    height: 300px;
+    position: relative;
+  }
+
+  .marker-info {
+    margin: 10px;
+  }
+
+  .carts {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+
+    .cart {
+      background-color: #dbdbdb;
+      width: fit-content;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: -5px 6px 8px 0px rgb(0 0 0 / 26%);
+
+      font-size: 15px;
+    }
+  }
 }
 </style>

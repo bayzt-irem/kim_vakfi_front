@@ -43,7 +43,7 @@ export default {
         password: this.password,
       });
       console.log("login result: ", result);
-      if (result) this.$router.replace("/home");
+      if (result) this.$router.replace("/all-places");
     },
   },
   mounted() {},

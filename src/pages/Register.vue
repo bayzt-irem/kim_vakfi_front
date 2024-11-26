@@ -52,7 +52,7 @@ export default {
         email: this.email,
         password: this.password,
       });
-      if (result) this.$router.replace("/home");
+      if (result) this.$router.replace("/all-places");
     },
   },
   mounted() {},

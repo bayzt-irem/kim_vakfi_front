@@ -16,11 +16,6 @@ const routes = [
         component: () => import("../pages/Register.vue"),
       },
       {
-        path: "/home",
-        name: "Home",
-        component: () => import("../pages/Home.vue"),
-      },
-      {
         path: "/users",
         name: "Users",
         component: () => import("../pages/Users.vue"),
