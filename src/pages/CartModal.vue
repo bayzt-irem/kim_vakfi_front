@@ -5,10 +5,10 @@
       title="Bilgi"
       @cancel="close()"
   >
-    <a-input v-model:value="cartInfo.title" placeholder="title" class="input"/>
-    <a-input v-model:value="cartInfo.description" placeholder="description" class="input"/>
-    <a-input v-model:value="cartInfo.yaw" placeholder="yaw" class="input" type="number"/>
-    <a-input v-model:value="cartInfo.pitch" placeholder="pitch" class="input" type="number"/>
+    <a-input v-model:value="payload.title" placeholder="title" class="input"/>
+    <a-input v-model:value="payload.description" placeholder="description" class="input"/>
+    <a-input v-model:value="payload.yaw" placeholder="yaw" class="input" type="number"/>
+    <a-input v-model:value="payload.pitch" placeholder="pitch" class="input" type="number"/>
     <div class="buttons">
       <Button title="Kaydet" :click-event="() => save()"/>
       <Button title="Vazgeç" :click-event="() => close()"/>
@@ -19,12 +19,15 @@
 <script>
 
 import Button from "@/components/Atom/Button.vue";
-import {CART_API} from "@/api/cart.js";
 
 export default {
   name: 'CartModal',
   components: {Button},
   props: {
+    saveOrUpdate: {
+      type: Function,
+      required: true
+    },
     close: {
       type: Function,
       required: true
@@ -50,8 +53,7 @@ export default {
   },
   methods: {
     async save(){
-      const result = await CART_API.create(this.payload)
-      console.log("save result..", result)
+      await this.saveOrUpdate(this.payload)
     }
   },
   mounted() {

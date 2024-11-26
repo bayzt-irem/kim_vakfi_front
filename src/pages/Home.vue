@@ -214,7 +214,7 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
             },{
               id: 'element2',
               element: document.querySelector('#custom-marker-element2'),
-              listContent: 'Custom element2',
+              listContent: 'test',
               position: {yaw: 0.5, pitch: -0.1},
               zIndex: 15,
             }],
@@ -240,10 +240,10 @@ viewerSize: ${viewerSize.width}px x ${viewerSize.height}px
 };
 </script>
 
-<style>
+<style scoped>
 .viewer-container {
-  width: 100%;
-  height: 500px;
+  width: 60%;
+  height: 300px;
   position: relative;
 }
 </style>

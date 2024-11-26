@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import {mapActions, mapState} from "vuex";
 import Sidebar from "@/components/Sidebar.vue";
 import Header from "@/components/Header.vue";
 import Loading from "../src/components/Loading.vue";
-import { getToken } from "@/utils/persistenceStorage.js";
+import {getToken} from "@/utils/persistenceStorage.js";
 
 export default {
   name: "App",
